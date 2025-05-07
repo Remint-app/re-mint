@@ -21,16 +21,7 @@ export default function Home() {
           </h1>
           <p className="text-lg md:text-xl text-gray-600 mb-6">
             Цифрові чеки та гарантії на Solana. Архів покупок, пошук, переоформлення — все у твоєму гаманці.
-          </p>
-
-          <div className="mb-6">
-            <WalletMultiButton />
-            {publicKey && (
-              <p className="mt-2 text-sm text-gray-500">
-                Підключено: <span className="font-mono">{publicKey.toBase58().slice(0, 4)}...{publicKey.toBase58().slice(-4)}</span>
-              </p>
-            )}
-          </div>
+          </p>          
 
           <div className="flex flex-col md:flex-row gap-4 justify-center">
             <Link href="/mint">
