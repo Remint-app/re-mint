@@ -2,6 +2,7 @@
 import { useCartStore } from '@/store/cartStore';
 import { useState } from 'react';
 import Link from 'next/link';
+import styles from '@/app/style/cart.module.css';
 
 export default function CartPage() {
   const { items, removeFromCart, clearCart } = useCartStore();
@@ -19,48 +20,45 @@ export default function CartPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto py-10 px-4">
-      <h1 className="text-3xl font-bold mb-6">Ваш кошик</h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Ваш кошик</h1>
 
       {items.length === 0 ? (
-        <p>Кошик порожній. <Link href="/" className="text-indigo-600">До каталогу</Link></p>
+        <p className={styles.emptyCart}>
+          Кошик порожній. <Link href="/market" className={styles.linkToCatalog}>До каталогу</Link>
+        </p>
       ) : (
         <>
-          <ul className="mb-6 space-y-6">
+          <ul className={styles.cartList}>
             {items.map((item) => (
-              <li key={item.id} className="flex items-center gap-4 border-b pb-4">
-                <img src={item.image} alt={item.name} className="w-24 h-16 object-cover rounded" />
-                <div className="flex-1">
-                  <p className="font-semibold">{item.name}</p>
-                  <p className="text-gray-600">${item.price}</p>
+              <li key={item.id} className={styles.cartItem}>
+                <img src={item.image} alt={item.name} className={styles.cartImage} />
+                <div className={styles.itemDetails}>
+                  <p className={styles.itemName}>{item.name}</p>
+                  <p className={styles.itemPrice}>${item.price}</p>
+                  <button className={styles.removeButton} onClick={() => removeFromCart(item.id)}>
+                    Видалити
+                  </button>
                 </div>
-                <button
-                  className="text-red-500 hover:underline"
-                  onClick={() => removeFromCart(item.id)}
-                >
-                  Видалити
-                </button>
               </li>
             ))}
           </ul>
 
-          <div className="mb-4">
-            <label className="flex items-center gap-2">
+          <div className={styles.paymentOptions}>
+            <label className={styles.cryptoCheckboxLabel}>
               <input
                 type="checkbox"
                 checked={payWithCrypto}
                 onChange={(e) => setPayWithCrypto(e.target.checked)}
+                className={styles.cryptoCheckbox}
               />
-              Оплатити криптовалютою
+              {' '}Оплатити криптовалютою
             </label>
           </div>
 
-          <p className="text-xl font-semibold mb-4">Загальна сума: ${total}</p>
+          <p className={styles.total}>Загальна сума: <span className={styles.totalAmount}>${total}</span></p>
 
-          <button
-            className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700"
-            onClick={handleCheckout}
-          >
+          <button className={styles.checkoutButton} onClick={handleCheckout}>
             Оплатити
           </button>
         </>
