@@ -1,18 +1,19 @@
+
 .container {
   max-width: 960px;
-  margin: 2rem auto; 
-  padding: 1.5rem; 
-  background-color: #f9f9f9; 
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #f9f9f9;
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .title {
-  font-size: 2.5rem; 
+  font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 2rem;
-  color: #333; 
-  text-align: center; 
+  color: #333;
+  text-align: center;
 }
 
 .emptyCart {
@@ -73,7 +74,7 @@
 }
 
 .removeButton {
-  background-color: #dc2626; 
+  background-color: #dc2626;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -90,16 +91,38 @@
 .paymentOptions {
   margin-bottom: 1rem;
   padding: 0.5rem 0;
+  background-color: #f0f8ff; 
+  border-radius: 0.25rem;
+  padding: 1rem;
 }
 
 .cryptoCheckboxLabel {
   display: flex;
   align-items: center;
   color: #555;
+  margin-bottom: 0.5rem;
 }
 
 .cryptoCheckbox {
   margin-right: 0.5rem;
+}
+
+.cryptoInfo {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #e6f7ff; 
+  border-radius: 0.25rem;
+  border: 1px solid #add8e6;
+}
+
+.cryptoInfo p {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.cryptoInfo strong {
+  font-weight: bold;
+  color: #007bff;
 }
 
 .total {
@@ -115,24 +138,42 @@
 }
 
 .checkoutButton {
-  background-color: #1d4ed8;
+  background-color: #28a745; 
   color: white;
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 0.25rem;
   cursor: pointer;
   font-size: 1.1rem;
-  transition: background-color 0.2s ease, transform 0.1s ease; 
+  transition: background-color 0.2s ease, transform 0.1s ease;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
 }
 
 .checkoutButton:hover {
-  background-color: #1e40af;
-  transform: translateY(-1px); 
+  background-color: #218838;
+  transform: translateY(-1px);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.08);
 }
 
 .checkoutButton:active {
-  transform: translateY(0); 
+  transform: translateY(0);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.qrContainer {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #f0fff0; 
+  border: 1px solid #a9d18e;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.qrContainer p {
+  color: #38761d;
+  margin-bottom: 1rem;
+}
+
+.qrContainer svg {
+  margin: 1rem auto;
 }
