@@ -41,7 +41,7 @@ export default function CartPage() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            name: `Order`,
+            name: `Order${id}`,
             description: `Квитанція про покупку. Деталі: http://localhost:3000/order/${id}`,
             imageDataUrl,
             recipient: wallet.publicKey.toBase58(),
