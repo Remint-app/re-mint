@@ -21,50 +21,57 @@ export default function CartPage() {
   const totalSOL = solPrice ? (totalUSD / solPrice).toFixed(3) : '...';
 
   const handleCheckout = async () => {
-    if (items.length === 0) return;
+  if (items.length === 0) return;
 
-    if (payWithCrypto) {
-      const id = uuidv4();
-      setOrderId(id);
-
-      if (!wallet.connected || !wallet.publicKey) {
-        alert('Підключіть гаманець!');
-        return;
-      }
-
-      const qrText = `http://localhost:3000/order/${id}`;
-
-      try {
-        const imageDataUrl = await QRCode.toDataURL(qrText);
-        //console.log(imageDataUrl, `Order-${id}`, `Квитанція про покупку. Деталі: http://localhost:3000/order/${id}`, wallet.publicKey.toBase58())
-        const res = await fetch('/api/mint-receipt', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: `Order${id}`,
-            description: `Квитанція про покупку. Деталі: http://localhost:3000/order/${id}`,
-            imageDataUrl,
-            recipient: wallet.publicKey.toBase58(),
-          }),
-        });
-
-        const result = await res.json();
-        console.log(result)
-        if (result.success) {
-          setShowQR(true);
-          clearCart();
-        } else {
-          alert('Помилка при мінті NFT: ' + result.error);
-        }
-      } catch (err) {
-        console.error('QR generation error:', err);
-      }
-
-    } else {
-      alert('Оплата доларами виконана!');
-      clearCart();
+  if (payWithCrypto) {
+    if (!wallet.connected || !wallet.publicKey) {
+      alert('Підключіть гаманець!');
+      return;
     }
-  };
+
+    try {
+     
+      const res = await fetch('/api/order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items }),
+      });
+
+      const { id } = await res.json();     
+
+      setOrderId(orderId);
+      const qrText = `http://localhost:3000/order/${id}`;
+      const imageDataUrl = await QRCode.toDataURL(qrText);
+      console.log(qrText)
+      
+      const mintRes = await fetch('/api/mint-receipt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: `Order-${orderId}`,
+          description: `Квитанція про покупку. Деталі: http://localhost:3000/order/${id}`,
+          imageDataUrl,
+          recipient: wallet.publicKey.toBase58(),
+        }),
+      });
+
+      const mintResult = await mintRes.json();
+      if (mintResult.success) {
+        setShowQR(true);
+        clearCart();
+      } else {
+        alert('Помилка при мінті NFT: ' + mintResult.error);
+      }
+    } catch (err) {
+      console.error('Checkout error:', err);
+      alert('Невідома помилка. Перевірте консоль.');
+    }
+  } else {
+    alert('Оплата доларами виконана!');
+    clearCart();
+  }
+};
+
 
 
   return (
