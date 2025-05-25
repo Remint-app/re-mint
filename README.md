@@ -1,28 +1,30 @@
 # 🧾 ReMint (Demo)
 
-**ReMint** — демонстраційний проєкт для створення цифрових чеків у вигляді NFT після оплати в криптовалюті **Solana (SOL)**. Чек містить QR-код та посилання на сторінку замовлення.
+**ReMint** — a demo project for creating digital receipts as NFTs after cryptocurrency payments in **Solana (SOL)**. The receipt contains a QR code and a link to the order page.
 
-## 📌 Про проєкт
+##  About the Project
 
-Це демо-версія. Фінальний продукт буде доступний як:
+This is a demo version. The final product will be available as:
 
-> ✅ **Бібліотека/плагін** для інтеграції криптооплати з NFT-чеками на Solana
+>  **Library/Plugin** for integrating crypto payments with NFT receipts on Solana
 
-##  Функціонал
-- 🛒 Кошик з товарами
-- 💰 Оплата в USD/SOL
-- 📊 Динамічний курс SOL
-- 🔳 Генерація QR-коду
-- 🎨 Мінт NFT через Metaplex
-- 💾 Збереження на Arweave
+## Features
+- 🛒 Shopping cart with items
+- 💰 Payment in USD/SOL
+- 📊 Dynamic SOL exchange rate
+- 🔳 QR code generation
+- 🎨 NFT minting via Metaplex
+- 💾 Storage on Arweave
 
-## 🛠 Технології
+## 🛠 Technologies
 - **Next.js** (App Router)
 - **Solana** `web3.js`
 - **Metaplex JS SDK**
 - **Arweave/Bundlr**
 - **TypeScript**
 - **CSS Modules**
+
+## Project Structure
 
 ##  Структура проекту
 ```\
