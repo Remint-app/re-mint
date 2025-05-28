@@ -8,71 +8,67 @@ import { v4 as uuidv4 } from 'uuid';
 import { useWallet } from '@solana/wallet-adapter-react';
 import QRCode from 'qrcode';
 
-
 export default function CartPage() {
-  const { items, removeFromCart, clearCart } = useCartStore();
+  const { items, removeFromCart, clearCart, updateQuantity } = useCartStore();
   const [payWithCrypto, setPayWithCrypto] = useState(false);
-  const [solPrice, setSolPrice] = useState(0);
+  const [solPrice, setSolPrice] = useState(167);
   const [showQR, setShowQR] = useState(false);
   const [orderId, setOrderId] = useState('');
   const wallet = useWallet();
 
-  const totalUSD = items.reduce((sum, item) => sum + item.price, 0);
+  const totalUSD = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const totalSOL = solPrice ? (totalUSD / solPrice).toFixed(3) : '...';
 
   const handleCheckout = async () => {
-  if (items.length === 0) return;
+    if (items.length === 0) return;
 
-  if (payWithCrypto) {
-    if (!wallet.connected || !wallet.publicKey) {
-      alert('Підключіть гаманець!');
-      return;
-    }
-
-    try {
-     
-      const res = await fetch('/api/order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items }),
-      });
-
-      const { id } = await res.json();     
-
-      setOrderId(orderId);
-      const qrText = `http://localhost:3000/order/${id}`;
-      const imageDataUrl = await QRCode.toDataURL(qrText);
-      console.log(qrText)
-      
-      const mintRes = await fetch('/api/mint-receipt', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: `Order-${orderId}`,
-          description: `Квитанція про покупку. Деталі: http://localhost:3000/order/${id}`,
-          imageDataUrl,
-          recipient: wallet.publicKey.toBase58(),
-        }),
-      });
-
-      const mintResult = await mintRes.json();
-      if (mintResult.success) {
-        setShowQR(true);
-        clearCart();
-      } else {
-        alert('Помилка при мінті NFT: ' + mintResult.error);
+    if (payWithCrypto) {
+      if (!wallet.connected || !wallet.publicKey) {
+        alert('Підключіть гаманець!');
+        return;
       }
-    } catch (err) {
-      console.error('Checkout error:', err);
-      alert('Невідома помилка. Перевірте консоль.');
+
+      try {
+        const res = await fetch('/api/order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ items }),
+        });
+
+        const { id } = await res.json();     
+
+        setOrderId(orderId);
+        const qrText = `http://localhost:3000/order/${id}`;
+        const imageDataUrl = await QRCode.toDataURL(qrText);
+        console.log(qrText)
+        
+        const mintRes = await fetch('/api/mint-receipt', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: `Order-${orderId}`,
+            description: `Квитанція про покупку. Деталі: http://localhost:3000/order/${id}`,
+            imageDataUrl,
+            recipient: wallet.publicKey.toBase58(),
+          }),
+        });
+
+        const mintResult = await mintRes.json();
+        if (mintResult.success) {
+          setShowQR(true);
+          clearCart();
+        } else {
+          alert('Помилка при мінті NFT: ' + mintResult.error);
+        }
+      } catch (err) {
+        console.error('Checkout error:', err);
+        alert('Невідома помилка. Перевірте консоль.');
+      }
+    } else {
+      alert('Оплата доларами виконана!');
+      clearCart();
     }
-  } else {
-    alert('Оплата доларами виконана!');
-    clearCart();
-  }
-};
-
-
+  };
 
   return (
     <div className={styles.container}>
@@ -91,6 +87,21 @@ export default function CartPage() {
                 <div className={styles.itemDetails}>
                   <p className={styles.itemName}>{item.name}</p>
                   <p className={styles.itemPrice}>${item.price}</p>
+                  <div className={styles.quantityControls}>
+                    <button 
+                      className={styles.quantityButton}
+                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                    >
+                      -
+                    </button>
+                    <span className={styles.quantity}>{item.quantity}</span>
+                    <button 
+                      className={styles.quantityButton}
+                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                    >
+                      +
+                    </button>
+                  </div>
                   <button className={styles.removeButton} onClick={() => removeFromCart(item.id)}>
                     Видалити
                   </button>

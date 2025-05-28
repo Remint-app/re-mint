@@ -80,3 +80,19 @@
 .cartIcon {
   font-size: 1.2rem;
 }
+
+.addToCartSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.itemCount {
+  font-size: 0.875rem;
+  color: #4b5563;
+  background-color: #f3f4f6;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-weight: 500;
+}

@@ -1,4 +1,3 @@
-
 .container {
   max-width: 960px;
   margin: 2rem auto;
@@ -176,4 +175,67 @@
 
 .qrContainer svg {
   margin: 1rem auto;
+}
+
+.qrScanner {
+  width: 100%;
+  max-width: 400px;
+  margin: 2rem auto;
+  border: 2px solid #e2e8f0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.divider span {
+  padding: 0 1rem;
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.quantityControls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.quantityButton {
+  background-color: #e2e8f0;
+  color: #1e293b;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.quantityButton:hover {
+  background-color: #cbd5e1;
+}
+
+.quantity {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #1e293b;
+  min-width: 2rem;
+  text-align: center;
 }

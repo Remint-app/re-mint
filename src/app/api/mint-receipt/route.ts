@@ -9,7 +9,7 @@ const PINATA_JWT = process.env.PINATA_JWT!;
 export async function POST(req: NextRequest) {
   try {
     const { imageDataUrl, name, description, recipient } = await req.json();
-   
+   console.log(description)
     const { uri } = await uploadToPinata({
       name,
       description,
@@ -48,7 +48,7 @@ async function uploadToPinata({
   imageDataUrl: string;
 }) {
   try {
-    
+    console.log(description)
     const imageBlob = await (await fetch(imageDataUrl)).blob();
     const imageFile = new File([imageBlob], 'receipt.png', { type: 'image/png' });
 
