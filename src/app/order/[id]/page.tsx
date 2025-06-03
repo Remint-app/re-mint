@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import styles from '@/app/style/cart.module.css';
+import styles from '@/app/style/order.module.css';
 
 interface OrderData {
   _id: string;
