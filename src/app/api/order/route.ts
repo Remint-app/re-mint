@@ -7,9 +7,13 @@ export async function POST(req: NextRequest) {
     const data = await req.json();
     const client = await clientPromise;
     const db = client.db();
+    
+    const totalPrice = data.items.reduce((sum: number, item: any) => sum + (item.price * item.quantity), 0);
 
     const result = await db.collection('orders').insertOne({
       ...data,
+      totalPrice,
+      buyerAddress: data.buyerAddress,
       createdAt: new Date(),
     });
 

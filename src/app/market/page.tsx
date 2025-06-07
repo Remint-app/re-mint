@@ -1,7 +1,8 @@
 'use client';
 import { useCartStore } from '@/store/cartStore';
 import styles from '@/app/style/market.module.css';
-import { AiOutlineShoppingCart } from 'react-icons/ai'; 
+import { AiOutlineShoppingCart } from 'react-icons/ai';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 const products = [
   {
@@ -33,30 +34,32 @@ export default function HomePage() {
   };
 
   return (
-    <main className={styles.container}>
-      <h1 className={styles.title}>Каталог товарів</h1>
-      <div className={styles.grid}>
-        {products.map((product) => (
-          <div key={product.id} className={styles.card}>
-            <img src={product.image} alt={product.name} className={styles.image} />
-            <h2 className={styles.productName}>{product.name}</h2>
-            <p className={styles.productPrice}>${product.price}</p>
-            <div className={styles.addToCartSection}>
-              <button
-                className={styles.addToCartButton}
-                onClick={() => addToCart(product)}
-              >
-                <AiOutlineShoppingCart className={styles.cartIcon} /> Додати до кошика
-              </button>
-              {getItemQuantity(product.id) > 0 && (
-                <span className={styles.itemCount}>
-                  В кошику: {getItemQuantity(product.id)}
-                </span>
-              )}
+    <ProtectedRoute>
+      <main className={styles.container}>
+        <h1 className={styles.title}>Каталог товарів</h1>
+        <div className={styles.grid}>
+          {products.map((product) => (
+            <div key={product.id} className={styles.card}>
+              <img src={product.image} alt={product.name} className={styles.image} />
+              <h2 className={styles.productName}>{product.name}</h2>
+              <p className={styles.productPrice}>${product.price}</p>
+              <div className={styles.addToCartSection}>
+                <button
+                  className={styles.addToCartButton}
+                  onClick={() => addToCart(product)}
+                >
+                  <AiOutlineShoppingCart className={styles.cartIcon} /> Додати до кошика
+                </button>
+                {getItemQuantity(product.id) > 0 && (
+                  <span className={styles.itemCount}>
+                    В кошику: {getItemQuantity(product.id)}
+                  </span>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </main>
+          ))}
+        </div>
+      </main>
+    </ProtectedRoute>
   );
 }

@@ -3,6 +3,9 @@
     padding: 1rem 0;
     border-bottom: 1px solid #eee;
     position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .navList {
@@ -38,6 +41,11 @@
         width: 100%;
         text-align: center;
     }
+
+    .cartButton {
+        justify-content: center;
+        width: 100%;
+    }
 }
 
 .navItem {
@@ -60,6 +68,9 @@
     align-items: center;
     gap: 0.5rem;
     position: relative;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
 }
 
 .cartIcon {
@@ -82,10 +93,15 @@
     cursor: pointer;
     padding: 0.5rem;
     margin-right: 1rem;
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 1.5rem;
 }
 
 @media (max-width: 768px) {
     .hamburger {
         display: block;
+        margin-right: 1rem;
     }
 }

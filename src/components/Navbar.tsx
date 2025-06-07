@@ -32,6 +32,11 @@ export default function Navbar() {
           </Link>
         </li>
         <li className={styles.navItem}>
+          <Link href="/order" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
+            Ордер
+          </Link>
+        </li>
+        <li className={styles.navItem}>
           <Link href="/market" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
             Маркет
           </Link>
