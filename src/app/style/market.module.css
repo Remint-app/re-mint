@@ -4,18 +4,39 @@
   padding: 1.5rem;
 }
 
+@media (max-width: 768px) {
+  .container {
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+}
+
 .title {
   font-size: 2.75rem; 
   font-weight: bold;
   margin-bottom: 2rem;
   text-align: center;
-  color: #333;
+  color: #e3d2d2;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
   gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 
 .card {
@@ -26,9 +47,21 @@
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
+@media (max-width: 768px) {
+  .card {
+    padding: 1rem;
+  }
+}
+
 .card:hover {
   transform: translateY(-0.5rem); 
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .card:hover {
+    transform: none;
+  }
 }
 
 .image {
@@ -39,11 +72,23 @@
   margin-bottom: 1rem;
 }
 
+@media (max-width: 768px) {
+  .image {
+    height: 180px;
+  }
+}
+
 .productName {
   font-size: 1.25rem;
   font-weight: 600;
   color: #333;
   margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .productName {
+    font-size: 1.1rem;
+  }
 }
 
 .productPrice {
@@ -52,9 +97,16 @@
   margin-bottom: 1rem;
 }
 
+@media (max-width: 768px) {
+  .productPrice {
+    font-size: 1rem;
+  }
+}
+
 .addToCartButton {
   display: flex; 
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   margin-top: 0.75rem;
   background-color: #3b82f6; 
@@ -66,6 +118,14 @@
   font-size: 1rem;
   font-weight: 500;
   transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .addToCartButton {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
 }
 
 .addToCartButton:hover {
@@ -79,4 +139,33 @@
 
 .cartIcon {
   font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .cartIcon {
+    font-size: 1.1rem;
+  }
+}
+
+.addToCartSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.itemCount {
+  font-size: 0.875rem;
+  color: #4b5563;
+  background-color: #f3f4f6;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .itemCount {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.6rem;
+  }
 }

@@ -1,11 +1,14 @@
-
 .navbar {
     background-color: #f8f9fa;
     padding: 1rem 0;
     border-bottom: 1px solid #eee;
-  }
-  
-  .navList {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.navList {
     display: flex;
     justify-content: right;
     list-style: none;
@@ -13,35 +16,68 @@
     margin: 0;
     align-items: center;
     padding-right: 20px;
-  }
-  
-  .navItem {
+}
+
+@media (max-width: 768px) {
+    .navList {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #f8f9fa;
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+
+    .navList.active {
+        display: flex;
+    }
+
+    .navItem {
+        margin: 0.5rem 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .cartButton {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+.navItem {
     margin: 0 1.5rem;
-  }
-  
-  .navLink {
+}
+
+.navLink {
     text-decoration: none;
     color: #333;
     font-weight: 500;
     transition: color 0.2s ease;
-  }
-  
-  .navLink:hover {
+}
+
+.navLink:hover {
     color: #007bff;
-  }
-  
-  .cartButton {
+}
+
+.cartButton {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    position: relative; 
-  }
-  
-  .cartIcon {
+    position: relative;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.cartIcon {
     font-size: 1.2rem;
-  }
-  
-  .cartCount {
+}
+
+.cartCount {
     position: absolute;
     top: -0.5rem;
     right: -0.5rem;
@@ -50,4 +86,22 @@
     border-radius: 50%;
     padding: 0.2rem 0.4rem;
     font-size: 0.8rem;
-  }
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-right: 1rem;
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+        margin-right: 1rem;
+    }
+}
