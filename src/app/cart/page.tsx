@@ -15,6 +15,7 @@ export default function CartPage() {
   const [solPrice, setSolPrice] = useState(167);
   const [showQR, setShowQR] = useState(false);
   const [orderId, setOrderId] = useState('');
+  const [qrImage, setQrImage] = useState('');
   const wallet = useWallet();
 
   const totalUSD = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -41,16 +42,17 @@ export default function CartPage() {
 
         const { id } = await res.json();     
 
-        setOrderId(orderId);
+        setOrderId(id);
         const qrText = `http://localhost:3000/order/${id}`;
         const imageDataUrl = await QRCode.toDataURL(qrText);
+        setQrImage(imageDataUrl);
         console.log(qrText)
         
         const mintRes = await fetch('/api/mint-receipt', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            name: `Order-${orderId}`,
+            name: `Order-${id}`,
             description: `Квитанція про покупку. Деталі: http://localhost:3000/order/${id}`,
             imageDataUrl,
             recipient: wallet.publicKey.toBase58(),
@@ -79,11 +81,26 @@ export default function CartPage() {
       <div className={styles.container}>
         <h1 className={styles.title}>Ваш кошик</h1>
 
-        {items.length === 0 ? (
+        {showQR && orderId && qrImage && (
+          <div className={styles.qrContainer}>
+            <p>Оплата пройшла успішно! Збережіть цей QR-код для перегляду чеку:</p>
+            <img src={qrImage} alt="QR code" width={200} height={200} />
+            <p>
+              <a href={`/order/${orderId}`} className={styles.linkToCatalog} target="_blank" rel="noopener noreferrer">
+                Перейти до чеку
+              </a>
+            </p>
+            <p style={{ color: '#888', fontSize: '0.95rem' }}>
+              QR-код буде доступний до перезавантаження сторінки
+            </p>
+          </div>
+        )}
+
+        {items.length === 0 && !(showQR && orderId && qrImage) ? (
           <p className={styles.emptyCart}>
             Кошик порожній. <Link href="/market" className={styles.linkToCatalog}>До каталогу</Link>
           </p>
-        ) : (
+        ) : items.length > 0 && (
           <>
             <ul className={styles.cartList}>
               {items.map((item) => (
