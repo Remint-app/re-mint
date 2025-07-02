@@ -1,0 +1,21 @@
+{
+  "name": "remint-lib",
+  "version": "0.1.0",
+  "description": "SDK для чеков, оплаты и NFT-расписок на Solana (аналог Stripe, но для крипто/чеков)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "keywords": ["solana", "nft", "receipt", "crypto", "payment", "sdk"],
+  "author": "Your Team",
+  "license": "MIT",
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+} 
